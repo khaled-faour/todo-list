@@ -1,4 +1,21 @@
 /* TODO LIST CSS FILE */
 body{
     font-family: 'Roboto', sans-serif;
+    background-color: #e6e6e6;
+}
+
+.container{
+    width: 600px;
+    margin: auto;
+}
+
+.title{
+    text-align: center;
+}
+
+
+@media only screen and (max-width: 768px){
+    .container{
+        width: 100%;
+    }
 }
