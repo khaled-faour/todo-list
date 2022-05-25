@@ -45,6 +45,20 @@ body{
 .todo-item-subtitle{
     height: 40px;
 }
+.action-buttons{
+    display: flex;
+    gap: 15px;
+}
+
+.action-buttons .fa-check{
+    color: green
+}
+.action-buttons .fa-pen-to-square{
+    color: grey
+}
+.action-buttons .fa-trash-can{
+    color: red
+}
 
 
 
