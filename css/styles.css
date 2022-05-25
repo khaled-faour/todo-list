@@ -16,6 +16,25 @@ body{
     text-align: center;
 }
 
+/* New TODO Button */
+.new-todo{
+    display: flex;
+    justify-content: end;
+    margin: 10px 0;
+}
+
+.new-todo button{
+    padding: 5px 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: 0.3s;
+}
+
+.new-todo button:hover{
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.2);
+}
 
 /* TODO Item Stylings */
 .todo-item{
