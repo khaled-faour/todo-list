@@ -66,7 +66,7 @@ window.onload = ()=>{
             const date = new Date(item.created_at);
             const options = {month:'short', day: 'numeric', year: 'numeric', hour12: true, hour: '2-digit', minute: '2-digit' }
             todoList.innerHTML += `
-            <div class="todo-item">
+            <div class="todo-item ${item.is_done === true? 'is-done': null}">
                 <div class="todo-item-head">
                     <div class="text">
                         <h3>${item.title}</h3>
@@ -97,6 +97,10 @@ window.onload = ()=>{
             return;
         }
 
+        if(point.value > 5 || point.value < 1){
+            alert('Points are set between 1 and 5');
+            return;
+        }
 
         console.log({title, description, point})
         let newItem = {

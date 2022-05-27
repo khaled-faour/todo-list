@@ -88,6 +88,11 @@ body{
     color: red
 }
 
+.is-done{
+    background-color: grey;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}
 /* Modal Stylings */
 .modal {
   display: none;
