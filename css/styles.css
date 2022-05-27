@@ -24,7 +24,7 @@ body{
     margin: 10px 0;
 }
 
-#order-by{
+#order-by, #is-done{
     font-size: 17px;
     border-radius: 5px;
     border: 1px solid;
