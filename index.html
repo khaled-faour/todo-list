@@ -49,13 +49,35 @@
             <h2>New todo</h2>
           </div>
           <div class="modal-body">
-            <input id="title-input" class=".title-input input" type="text" name="title" placeholder="Title">
-            <input id="point-input" class="input .point-input"  type="number" name="point" placeholder="Point">
-            <textarea id="description-input" class="description-input input" name="description" placeholder="Description" cols="30" rows="5"></textarea>
+            <input id="add-title-input" class=".title-input input" type="text" name="title" placeholder="Title">
+            <input id="add-point-input" class="input .point-input"  type="number" name="point" placeholder="Point">
+            <textarea id="add-description-input" class="description-input input" name="description" placeholder="Description" cols="30" rows="5"></textarea>
 
           </div>
           <div class="modal-footer">
             <button id="save-new-todo">Add</button>
+          </div>
+        </div>
+      
+    </div>
+
+    <!-- Edit Todo Item Modal -->
+    <div id="edit-modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Edit todo</h2>
+          </div>
+          <div class="modal-body">
+            <input id="edit-title-input" class=".title-input input" type="text" name="title" placeholder="Title">
+            <input id="edit-point-input" class="input .point-input"  type="number" name="point" placeholder="Point">
+            <textarea id="edit-description-input" class="description-input input" name="description" placeholder="Description" cols="30" rows="5"></textarea>
+
+          </div>
+          <div class="modal-footer">
+            <button id="cancel-edit">cancel</button>
+            <button id="save-edit">Save</button>
           </div>
         </div>
       

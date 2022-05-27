@@ -3,7 +3,8 @@ window.onload = ()=>{
     fetchTodoItems();
 }
     let addModal = document.getElementById("add-modal");
-    let confirmRemoveModal = document.getElementById('confirm-remove-modal')
+    let confirmRemoveModal = document.getElementById('confirm-remove-modal');
+    let editModal = document.getElementById('edit-modal');
     let closeAddBtn = document.getElementById('add-close');
     let addBtn = document.getElementById('add-btn');
     let saveTodo = document.getElementById('save-new-todo');
@@ -42,7 +43,7 @@ window.onload = ()=>{
                     </div>
                     <div class="action-buttons">
                         <a href="#"><i title="Mark as done" class="fa-solid fa-check"></i></a>
-                        <a href="#"><i title="Edit" class="fa-solid fa-pen-to-square"></i></a>
+                        <a onclick = 'editTodo(${item.id})' href="#"><i title="Edit" class="fa-solid fa-pen-to-square"></i></a>
                         <a onclick = 'removeItem(${item.id})' href="#"><i title="Remove" class="fa-solid fa-trash-can"></i></a>
                     </div>
                 </div>
@@ -56,9 +57,9 @@ window.onload = ()=>{
 
     // Save New Todo Item
     saveTodo.onclick=()=>{
-        const title = document.getElementById('title-input')
-        const point = document.getElementById('point-input')
-        const description = document.getElementById('description-input')
+        const title = document.getElementById('add-title-input')
+        const point = document.getElementById('add-point-input')
+        const description = document.getElementById('add-description-input')
 
         if(title === "" || description === "" || point === ""){
             alert("All fields are requried")
@@ -103,6 +104,41 @@ window.onload = ()=>{
             fetchTodoItems()
             confirmRemoveModal.style.display = 'none'
         }
+    }
+
+    // Edit Todo Item
+    const editTodo = (id)=>{
+        const index = todoItems.findIndex(item=> item.id === id)
+
+        const cancel = document.getElementById('cancel-edit')
+        const save = document.getElementById('save-edit')
+
+        const title = document.getElementById('edit-title-input')
+        const point = document.getElementById('edit-point-input')
+        const description = document.getElementById('edit-description-input')
+        
+
+        title.value = todoItems[index].title;
+        description.value = todoItems[index].description;
+        point.value = todoItems[index].point
+
+
+        cancel.onclick = () => {
+            editModal.style.display = 'none'
+        }
+
+        save.onclick = () => {
+            todoItems[index] = {
+                ...todoItems[index],
+                title: title.value,
+                point: point.value,
+                description: description.value
+            }
+            localStorage.setItem('todo-items', JSON.stringify(todoItems))
+            fetchTodoItems()
+            editModal.style.display = 'none'
+        }
+        editModal.style.display = 'block'
     }
 
 
