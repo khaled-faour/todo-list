@@ -73,9 +73,10 @@ window.onload = ()=>{
                         <h5>${date.toLocaleDateString('en-US' ,options)}</h5>
                     </div>
                     <div class="action-buttons">
-                        <a onclick = 'markDone(${item.id})' href="#"><i title="Mark as done" class="fa-solid fa-check"></i></a>
-                        <a onclick = 'editTodo(${item.id})' href="#"><i title="Edit" class="fa-solid fa-pen-to-square"></i></a>
-                        <a onclick = 'removeItem(${item.id})' href="#"><i title="Remove" class="fa-solid fa-trash-can"></i></a>
+                        <a class="not-done-action" onclick = 'markDone(${item.id})' href="#"><i title="Mark as done" class="fa-solid fa-check"></i></a>
+                        <a class="not-done-action" onclick = 'editTodo(${item.id})' href="#"><i title="Edit" class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="not-done-action" onclick = 'removeItem(${item.id})' href="#"><i title="Remove" class="fa-solid fa-trash-can"></i></a>
+                        <a hidden class="done-action" onclick = 'markNotDone(${item.id})' href="#"><i class="fa-solid fa-arrow-rotate-left"></i></a>
                     </div>
                 </div>
                 <div class="todo-item-subtitle">
@@ -181,6 +182,16 @@ window.onload = ()=>{
         const index = todoItems.findIndex(item=>item.id === id);
 
         todoItems[index].is_done = true;
+
+        localStorage.setItem('todo-items', JSON.stringify(todoItems));
+        fetchTodoItems(todoItems);
+    }
+
+    // Mark Todo Item as Not Done
+    const markNotDone = (id)=>{
+        const index = todoItems.findIndex(item=>item.id === id);
+
+        todoItems[index].is_done = false;
 
         localStorage.setItem('todo-items', JSON.stringify(todoItems));
         fetchTodoItems(todoItems);

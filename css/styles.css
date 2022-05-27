@@ -87,6 +87,9 @@ body{
 .action-buttons .fa-trash-can{
     color: red
 }
+.action-buttons .fa-arrow-rotate-left{
+    color: black
+}
 
 .is-done{
     background-color: grey;
@@ -94,9 +97,14 @@ body{
     text-decoration-thickness: 2px;
 }
 
-.is-done .action-buttons{
+.is-done .not-done-action{
     display: none;
 }
+
+.is-done .done-action{
+    display: block;
+}
+
 /* Modal Stylings */
 .modal {
   display: none;
