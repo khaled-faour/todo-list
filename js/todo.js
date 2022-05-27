@@ -56,9 +56,9 @@ window.onload = ()=>{
 
     // Save New Todo Item
     saveTodo.onclick=()=>{
-        const title = document.getElementById('title-input').value
-        const point = document.getElementById('point-input').value
-        const description = document.getElementById('description-input').value
+        const title = document.getElementById('title-input')
+        const point = document.getElementById('point-input')
+        const description = document.getElementById('description-input')
 
         if(title === "" || description === "" || point === ""){
             alert("All fields are requried")
@@ -69,15 +69,20 @@ window.onload = ()=>{
         console.log({title, description, point})
         let newItem = {
             id : Date.now()+Math.floor((Math.random()*100000)),
-            title : title,
-            description : description,
-            point : point,
+            title : title.value,
+            description : description.value,
+            point : point.value,
             is_done : false,
             created_at : Date.now()
         }
         todoItems.push(newItem)
         localStorage.setItem('todo-items', JSON.stringify(todoItems))
-        closeAddBtn.click()
+        
+        title.value=""
+        description.value=""
+        point.value=""
+
+        addModal.style.display = 'none'
         fetchTodoItems();
     }
 
