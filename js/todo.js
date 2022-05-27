@@ -1,6 +1,6 @@
 // TODO LIST JAVASCRIPT FILE
 window.onload = ()=>{
-    fetchTodoItems();
+    fetchTodoItems(todoItems);
 }
     let addModal = document.getElementById("add-modal");
     let confirmRemoveModal = document.getElementById('confirm-remove-modal');
@@ -10,6 +10,7 @@ window.onload = ()=>{
     let saveTodo = document.getElementById('save-new-todo');
     let orderSelect = document.getElementById('order-by');
     let doneSelect = document.getElementById('is-done');
+    let searchInput = document.getElementById('search');
     let todoList = document.getElementsByClassName('todo-list')[0];
 
 
@@ -37,24 +38,30 @@ window.onload = ()=>{
     orderSelect.onchange = (e)=>{
         localStorage.setItem('todo-items-order', e.target.value)
         orderBy = e.target.value
-        fetchTodoItems()
+        fetchTodoItems(todoItems)
     }
 
     // Change done/not_done filer
     doneSelect.onchange = (e)=>{
         if(e.target.value === 'true') isDone = true
         else isDone = false
-        fetchTodoItems()
+        fetchTodoItems(todoItems)
     }
 
+    // Handle search input
+    searchInput.oninput = (e)=>{
+        const value = e.target.value
+        const filterdItems = todoItems.filter(item=> item.title.includes(value) || item.description.includes(value))
+        fetchTodoItems(filterdItems)
+    }
 
     // Append Todo Items
-    const fetchTodoItems = ()=>{
+    const fetchTodoItems = (itemsList = [])=>{
         todoList.innerHTML = ''
         
-        todoItems.sort((a,b)=> b[orderBy] - a[orderBy])
+        itemsList.sort((a,b)=> b[orderBy] - a[orderBy])
         console.log('isDonw: ', isDone)
-        todoItems.filter(item=>item.is_done === isDone).map(item=>{
+        itemsList.filter(item=>item.is_done === isDone).map(item=>{
             console.log(item)
             const date = new Date(item.created_at);
             const options = {month:'short', day: 'numeric', year: 'numeric', hour12: true, hour: '2-digit', minute: '2-digit' }
@@ -85,7 +92,7 @@ window.onload = ()=>{
         const point = document.getElementById('add-point-input')
         const description = document.getElementById('add-description-input')
 
-        if(title === "" || description === "" || point === ""){
+        if(title.value === "" || description.value === "" || point.value === ""){
             alert("All fields are requried")
             return;
         }
@@ -108,7 +115,7 @@ window.onload = ()=>{
         point.value=""
 
         addModal.style.display = 'none'
-        fetchTodoItems();
+        fetchTodoItems(todoItems);
     }
 
 
@@ -125,7 +132,7 @@ window.onload = ()=>{
             console.log(id)
             todoItems = todoItems.filter(item=>item.id != id)
             localStorage.setItem('todo-items', JSON.stringify(todoItems))
-            fetchTodoItems()
+            fetchTodoItems(todoItems)
             confirmRemoveModal.style.display = 'none'
         }
     }
@@ -159,7 +166,7 @@ window.onload = ()=>{
                 description: description.value
             }
             localStorage.setItem('todo-items', JSON.stringify(todoItems))
-            fetchTodoItems()
+            fetchTodoItems(todoItems)
             editModal.style.display = 'none'
         }
         editModal.style.display = 'block'
@@ -172,7 +179,7 @@ window.onload = ()=>{
         todoItems[index].is_done = true;
 
         localStorage.setItem('todo-items', JSON.stringify(todoItems));
-        fetchTodoItems();
+        fetchTodoItems(todoItems);
     }
 
 
