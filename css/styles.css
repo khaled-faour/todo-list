@@ -81,7 +81,7 @@ body{
 
 /* Modal Stylings */
 .modal {
-  /* display: none; */
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -99,10 +99,14 @@ body{
 
 
 .modal-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   background-color: #fefefe;
   padding: 20px;
   border: 1px solid #888;
-  margin: 15% auto;
+  margin: auto;
   width: 50%;
   animation-name: fade;
   animation-duration: 0.3s;
@@ -135,7 +139,7 @@ body{
 }
 @keyframes fade {
     from {opacity: 0}
-    to {top: 0; opacity: 1}
+    to { opacity: 1}
 }
 
 /* Small Screen Stylings */
