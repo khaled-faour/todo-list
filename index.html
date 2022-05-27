@@ -26,9 +26,23 @@
         <!-- Todo List Content -->
         <div class="content">
 
-            <!-- Add New Todo Button -->
-            <div class="new-todo">
-                <button id="add-btn" onclick=""><i class="fa-solid fa-plus"></i> New</button>
+            <div>
+                
+                <!-- Add New Todo Button -->
+                <div class="head">
+                    <div class="sort">
+                        Filters: 
+                        <select id="order-by">
+                            <option value="created_at">Date/Time</option>
+                            <option value="point">Priority</option>
+                        </select>
+                        <select id="is-done">
+                            <option value="false">Not Done</option>
+                            <option value="true">Done</option>
+                        </select>
+                    </div>
+                    <button id="add-btn" onclick=""><i class="fa-solid fa-plus"></i> New</button>
+                </div>
             </div>
 
             <!-- TODO Items List -->

@@ -17,13 +17,21 @@ body{
 }
 
 /* New TODO Button */
-.new-todo, .modal-footer{
+.head{
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
+    align-items: baseline;
     margin: 10px 0;
 }
 
-.new-todo button, .modal-footer button{
+#order-by{
+    font-size: 17px;
+    border-radius: 5px;
+    border: 1px solid;
+    font-family: 'Roboto', sans-serif;
+}
+
+.head button, .modal-footer button{
     padding: 5px 10px;
     border: 2px solid black;
     border-radius: 5px;
@@ -31,7 +39,7 @@ body{
     transition: 0.3s;
 }
 
-.new-todo button:hover, .modal-footer button:hover{
+.head button:hover, .modal-footer button:hover{
     cursor: pointer;
     background-color: rgba(0,0,0,0.2);
 }
@@ -96,6 +104,12 @@ body{
 
 .modal-header, .modal-body {
     padding: 2px 16px;
+}
+
+.modal-footer{
+    display: flex;
+    justify-content: end;
+    margin: 10px 0;
 }
 
 

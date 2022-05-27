@@ -8,10 +8,20 @@ window.onload = ()=>{
     let closeAddBtn = document.getElementById('add-close');
     let addBtn = document.getElementById('add-btn');
     let saveTodo = document.getElementById('save-new-todo');
+    let orderSelect = document.getElementById('order-by');
+    let doneSelect = document.getElementById('is-done');
     let todoList = document.getElementsByClassName('todo-list')[0];
+
 
     // Get Todo Items From Local Storage
     let todoItems = JSON.parse(localStorage.getItem('todo-items')) || [];
+
+    // Get Todo Order Value
+    let orderBy = localStorage.getItem('todo-items-order') || 'created_at';
+    orderSelect.value = orderBy;
+
+    // Get done value 
+    let isDone = false;
 
     // Open Add New Todo Modal
     addBtn.onclick=()=>{
@@ -23,14 +33,28 @@ window.onload = ()=>{
         addModal.style.display = 'none'
     }
 
+    // Save Todo Order Value
+    orderSelect.onchange = (e)=>{
+        localStorage.setItem('todo-items-order', e.target.value)
+        orderBy = e.target.value
+        fetchTodoItems()
+    }
 
+    // Change done/not_done filer
+    doneSelect.onchange = (e)=>{
+        if(e.target.value === 'true') isDone = true
+        else isDone = false
+        fetchTodoItems()
+    }
 
 
     // Append Todo Items
     const fetchTodoItems = ()=>{
         todoList.innerHTML = ''
-    
-        todoItems.map(item=>{
+        
+        todoItems.sort((a,b)=> b[orderBy] - a[orderBy])
+        console.log('isDonw: ', isDone)
+        todoItems.filter(item=>item.is_done === isDone).map(item=>{
             console.log(item)
             const date = new Date(item.created_at);
             const options = {month:'short', day: 'numeric', year: 'numeric', hour12: true, hour: '2-digit', minute: '2-digit' }
