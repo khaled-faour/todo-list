@@ -10,3 +10,20 @@ addBtn.onclick=()=>{
 closeAddBtn.onclick = () => {
     addModal.style.display = 'none'
 }
+
+const todoItems = localStorage.getItem('todo-items') || [];
+
+
+
+// Todo Item Class
+class Todo {
+	constructor(title, description, point){
+  	this.id = Date.now()+Math.floor((Math.random()*100000))
+    this.title = title
+    this.description = description
+    this.point = point
+    this.isDone = false
+    this.createdAt = new Date(Date.now())
+  }
+  
+}
