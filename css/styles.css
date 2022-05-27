@@ -17,13 +17,13 @@ body{
 }
 
 /* New TODO Button */
-.new-todo{
+.new-todo, .modal-footer{
     display: flex;
     justify-content: end;
     margin: 10px 0;
 }
 
-.new-todo button{
+.new-todo button, .modal-footer button{
     padding: 5px 10px;
     border: 2px solid black;
     border-radius: 5px;
@@ -31,7 +31,7 @@ body{
     transition: 0.3s;
 }
 
-.new-todo button:hover{
+.new-todo button:hover, .modal-footer button:hover{
     cursor: pointer;
     background-color: rgba(0,0,0,0.2);
 }
@@ -79,12 +79,73 @@ body{
     color: red
 }
 
+/* Modal Stylings */
+.modal {
+  /* display: none; */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
 
+.modal-header, .modal-body {
+    padding: 2px 16px;
+}
+
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  margin: 15% auto;
+  width: 50%;
+  animation-name: fade;
+  animation-duration: 0.3s;
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Input stylings */
+.input{
+    width: 100%;
+    padding: 8px;
+    font-size: 17px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    border: 1px solid;
+    font-family: 'Roboto', sans-serif;
+}
+@keyframes fade {
+    from {opacity: 0}
+    to {top: 0; opacity: 1}
+}
 
 /* Small Screen Stylings */
 @media only screen and (max-width: 768px){
     .container{
         width: 90%;
         padding: 10px;
+    }
+
+    .modal-content{
+        width: 90%;
     }
 }
