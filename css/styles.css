@@ -93,6 +93,10 @@ body{
     text-decoration: line-through;
     text-decoration-thickness: 2px;
 }
+
+.is-done .action-buttons{
+    display: none;
+}
 /* Modal Stylings */
 .modal {
   display: none;
