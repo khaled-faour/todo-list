@@ -59,6 +59,12 @@ window.onload = ()=>{
         const point = document.getElementById('point-input').value
         const description = document.getElementById('description-input').value
 
+        if(title === "" || description === "" || point === ""){
+            alert("All fields are requried")
+            return;
+        }
+
+
         console.log({title, description, point})
         let newItem = {
             id : Date.now()+Math.floor((Math.random()*100000)),
