@@ -70,6 +70,7 @@ window.onload = ()=>{
         }
         todoItems.push(newItem)
         localStorage.setItem('todo-items', JSON.stringify(todoItems))
+        closeAddBtn.click()
         fetchTodoItems();
     }
 
