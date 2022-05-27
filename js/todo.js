@@ -27,13 +27,17 @@ window.onload = ()=>{
     // Append Todo Items
     const fetchTodoItems = ()=>{
         todoList.innerHTML = ''
+    
         todoItems.map(item=>{
+            console.log(item)
+            const date = new Date(item.created_at);
+            const options = {month:'short', day: 'numeric', year: 'numeric', hour12: true, hour: '2-digit', minute: '2-digit' }
             todoList.innerHTML += `
             <div class="todo-item">
                 <div class="todo-item-head">
                     <div class="text">
                         <h3>${item.title}</h3>
-                        <h5>May 24, 2022 6:35 PM</h5>
+                        <h5>${date.toLocaleDateString('en-US' ,options)}</h5>
                     </div>
                     <div class="action-buttons">
                         <a href="#"><i title="Mark as done" class="fa-solid fa-check"></i></a>
@@ -62,7 +66,7 @@ window.onload = ()=>{
             description : description,
             point : point,
             is_done : false,
-            created_at : new Date(Date.now())
+            created_at : Date.now()
         }
         todoItems.push(newItem)
         localStorage.setItem('todo-items', JSON.stringify(todoItems))
