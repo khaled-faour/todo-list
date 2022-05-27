@@ -3,6 +3,7 @@ window.onload = ()=>{
     fetchTodoItems();
 }
     let addModal = document.getElementById("add-modal");
+    let confirmRemoveModal = document.getElementById('confirm-remove-modal')
     let closeAddBtn = document.getElementById('add-close');
     let addBtn = document.getElementById('add-btn');
     let saveTodo = document.getElementById('save-new-todo');
@@ -42,7 +43,7 @@ window.onload = ()=>{
                     <div class="action-buttons">
                         <a href="#"><i title="Mark as done" class="fa-solid fa-check"></i></a>
                         <a href="#"><i title="Edit" class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="#"><i title="Remove" class="fa-solid fa-trash-can"></i></a>
+                        <a onclick = 'removeItem(${item.id})' href="#"><i title="Remove" class="fa-solid fa-trash-can"></i></a>
                     </div>
                 </div>
                 <div class="todo-item-subtitle">
@@ -80,6 +81,24 @@ window.onload = ()=>{
         fetchTodoItems();
     }
 
+
+    // Remove Todo Item
+    const removeItem = (id)=>{
+        confirmRemoveModal.style.display = 'block'
+        const cancel = document.getElementById('cancel-remove')
+        const confirm = document.getElementById('confirm-remove')
+
+        cancel.onclick = ()=>{
+            confirmRemoveModal.style.display = 'none'
+        }
+        confirm.onclick = ()=>{
+            console.log(id)
+            todoItems = todoItems.filter(item=>item.id != id)
+            localStorage.setItem('todo-items', JSON.stringify(todoItems))
+            fetchTodoItems()
+            confirmRemoveModal.style.display = 'none'
+        }
+    }
 
 
 
