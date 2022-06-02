@@ -156,11 +156,13 @@
         const title = $('#edit-title-input')
         const point = $('#edit-point-input')
         const description = $('#edit-description-input')
+        const duedate = $('#edit-duedate-input')
         
 
         title.val(todoItems[index].title)
         description.val(todoItems[index].description)
         point.val(todoItems[index].point)
+        duedate.val(new Date(todoItems[index].due_date).toISOString().split('.')[0])
 
 
         cancel.click(() => {
@@ -184,7 +186,8 @@
                 ...todoItems[index],
                 title: title.val(),
                 point: point.val(),
-                description: description.val()
+                description: description.val(),
+                due_date: duedate.val()
             }
             localStorage.setItem('todo-items', JSON.stringify(todoItems))
             fetchTodoItems(todoItems)
