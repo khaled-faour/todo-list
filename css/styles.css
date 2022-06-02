@@ -105,6 +105,9 @@ body{
     display: block;
 }
 
+.due{
+    background-color: orangered;
+}
 /* Modal Stylings */
 .modal {
   display: none;

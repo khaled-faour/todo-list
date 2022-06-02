@@ -64,12 +64,9 @@
         todoList.html('')
         itemsList.sort((a,b)=> b[orderBy] - a[orderBy])
         itemsList.filter(item=>item.is_done === isDone).map(item=>{
-            console.log(item.due_date - Date.now())
-            console.log(item.due_date-Date.now() > 3600000 ? "Not Due" : "Due")
-            console.log(item)
             const date = new Date(item.created_at);
             const options = {month:'short', day: 'numeric', year: 'numeric', hour12: true, hour: '2-digit', minute: '2-digit' }
-            todoList.append(`<div class="todo-item ${item.is_done === true? 'is-done': null}">
+            todoList.append(`<div class="todo-item ${item.is_done === true? 'is-done': item.due_date-Date.now() > 3600000 ? "" : "due"}">
                                 <div class="todo-item-head">
                                     <div class="text">
                                         <h3>${item.title}</h3>
