@@ -92,6 +92,7 @@
         const title = $('#add-title-input')
         const point = $('#add-point-input')
         const description = $('#add-description-input')
+        const duedate = $('#add-duedate-input')
 
         if(title.val() === "" || description.val() === "" || point.val() === ""){
             alert("All fields are requried")
@@ -110,7 +111,8 @@
             description : description.val(),
             point : point.val(),
             is_done : false,
-            created_at : Date.now()
+            created_at : Date.now(),
+            due_date: Date.parse(duedate.val())
         }
         todoItems.push(newItem)
         localStorage.setItem('todo-items', JSON.stringify(todoItems))
