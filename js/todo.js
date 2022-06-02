@@ -166,6 +166,18 @@
         })
 
         save.click(() => {
+
+            if(title.val() === "" || description.val() === "" || point.val() === ""){
+                alert("All fields are requried")
+                return;
+            }
+    
+            if(point.val() > 5 || point.val() < 1){
+                alert('Points are set between 1 and 5');
+                return;
+            }
+
+
             todoItems[index] = {
                 ...todoItems[index],
                 title: title.val(),
