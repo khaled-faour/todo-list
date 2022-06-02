@@ -162,7 +162,7 @@
         title.val(todoItems[index].title)
         description.val(todoItems[index].description)
         point.val(todoItems[index].point)
-        duedate.val(new Date(todoItems[index].due_date).toISOString().split('.')[0])
+        duedate.val(new Date(todoItems[index].due_date).toLocaleString('sv-SE').replace(' ', 'T'))
 
 
         cancel.click(() => {
