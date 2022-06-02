@@ -64,6 +64,8 @@
         todoList.html('')
         itemsList.sort((a,b)=> b[orderBy] - a[orderBy])
         itemsList.filter(item=>item.is_done === isDone).map(item=>{
+            console.log(item.due_date - Date.now())
+            console.log(item.due_date-Date.now() > 3600000 ? "Not Due" : "Due")
             console.log(item)
             const date = new Date(item.created_at);
             const options = {month:'short', day: 'numeric', year: 'numeric', hour12: true, hour: '2-digit', minute: '2-digit' }
@@ -171,6 +173,7 @@
 
 
         cancel.click(() => {
+            save.off('click')
             editModal.hide()
         })
 
@@ -197,7 +200,7 @@
                 title: title.val(),
                 point: point.val(),
                 description: description.val(),
-                due_date: duedate.val()
+                due_date: Date.parse(duedate.val())
             }
             localStorage.setItem('todo-items', JSON.stringify(todoItems))
             fetchTodoItems(todoItems)
