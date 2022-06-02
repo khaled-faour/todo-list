@@ -1,17 +1,18 @@
-// TODO LIST JAVASCRIPT FILE
-window.onload = ()=>{
-    fetchTodoItems(todoItems);
-}
-    let addModal = document.getElementById("add-modal");
-    let confirmRemoveModal = document.getElementById('confirm-remove-modal');
-    let editModal = document.getElementById('edit-modal');
-    let closeAddBtn = document.getElementById('add-close');
-    let addBtn = document.getElementById('add-btn');
-    let saveTodo = document.getElementById('save-new-todo');
-    let orderSelect = document.getElementById('order-by');
-    let doneSelect = document.getElementById('is-done');
-    let searchInput = document.getElementById('search');
-    let todoList = document.getElementsByClassName('todo-list')[0];
+    // TODO LIST JAVASCRIPT FILE
+    $(document).ready(()=>{
+        fetchTodoItems(todoItems);
+    })
+
+    let addModal = $("#add-modal");
+    let confirmRemoveModal = $('#confirm-remove-modal');
+    let editModal = $('#edit-modal');
+    let closeAddBtn = $('#add-close');
+    let addBtn = $('#add-btn');
+    let saveTodo = $('#save-new-todo');
+    let orderSelect = $('#order-by');
+    let doneSelect = $('#is-done');
+    let searchInput = $('#search');
+    let todoList = $('.todo-list:first');
 
 
     // Get Todo Items From Local Storage
@@ -25,80 +26,79 @@ window.onload = ()=>{
     let isDone = false;
 
     // Open Add New Todo Modal
-    addBtn.onclick=()=>{
-        addModal.style.display = 'block'
-    }
+    addBtn.click(()=>{
+        addModal.show()
+    })
+        
+    
 
     // Close Add New Todo Modal
-    closeAddBtn.onclick = () => {
-        addModal.style.display = 'none'
-    }
+    closeAddBtn.click(() => {
+        addModal.hide()
+    })
 
     // Save Todo Order Value
-    orderSelect.onchange = (e)=>{
+    orderSelect.change((e)=>{
         localStorage.setItem('todo-items-order', e.target.value)
         orderBy = e.target.value
         fetchTodoItems(todoItems)
-    }
+    })
 
     // Change done/not_done filer
-    doneSelect.onchange = (e)=>{
+    doneSelect.change((e)=>{
         if(e.target.value === 'true') isDone = true
         else isDone = false
         fetchTodoItems(todoItems)
-    }
+    })
 
     // Handle search input
-    searchInput.oninput = (e)=>{
+    searchInput.on('input',(e)=>{
+        console.log(e.target.value)
         const value = e.target.value
         const filterdItems = todoItems.filter(item=> item.title.includes(value) || item.description.includes(value))
         fetchTodoItems(filterdItems)
-    }
+    })
 
     // Append Todo Items
     const fetchTodoItems = (itemsList = [])=>{
-        todoList.innerHTML = ''
-        
+        todoList.html('')
         itemsList.sort((a,b)=> b[orderBy] - a[orderBy])
-        console.log('isDonw: ', isDone)
         itemsList.filter(item=>item.is_done === isDone).map(item=>{
             console.log(item)
             const date = new Date(item.created_at);
             const options = {month:'short', day: 'numeric', year: 'numeric', hour12: true, hour: '2-digit', minute: '2-digit' }
-            todoList.innerHTML += `
-            <div class="todo-item ${item.is_done === true? 'is-done': null}">
-                <div class="todo-item-head">
-                    <div class="text">
-                        <h3>${item.title}</h3>
-                        <h5>${date.toLocaleDateString('en-US' ,options)}</h5>
-                    </div>
-                    <div class="action-buttons">
-                        <a class="not-done-action" onclick = 'markDone(${item.id})' href="#"><i title="Mark as done" class="fa-solid fa-check"></i></a>
-                        <a class="not-done-action" onclick = 'editTodo(${item.id})' href="#"><i title="Edit" class="fa-solid fa-pen-to-square"></i></a>
-                        <a class="not-done-action" onclick = 'removeItem(${item.id})' href="#"><i title="Remove" class="fa-solid fa-trash-can"></i></a>
-                        <a hidden class="done-action" onclick = 'markNotDone(${item.id})' href="#"><i class="fa-solid fa-arrow-rotate-left"></i></a>
-                    </div>
-                </div>
-                <div class="todo-item-subtitle">
-                    <p>${item.description}</p>
-                </div>
-            </div>
-            `
+            todoList.append(`<div class="todo-item ${item.is_done === true? 'is-done': null}">
+                                <div class="todo-item-head">
+                                    <div class="text">
+                                        <h3>${item.title}</h3>
+                                        <h5>${date.toLocaleDateString('en-US' ,options)}</h5>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <a class="not-done-action" onclick = 'markDone(${item.id})' href="#"><i title="Mark as done" class="fa-solid fa-check"></i></a>
+                                        <a class="not-done-action" onclick = 'editTodo(${item.id})' href="#"><i title="Edit" class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="not-done-action" onclick = 'removeItem(${item.id})' href="#"><i title="Remove" class="fa-solid fa-trash-can"></i></a>
+                                        <a hidden class="done-action" onclick = 'markNotDone(${item.id})' href="#"><i class="fa-solid fa-arrow-rotate-left"></i></a>
+                                    </div>
+                                </div>
+                                <div class="todo-item-subtitle">
+                                    <p>${item.description}</p>
+                                </div>
+                            </div>`)
         })
     }
 
     // Save New Todo Item
-    saveTodo.onclick=()=>{
-        const title = document.getElementById('add-title-input')
-        const point = document.getElementById('add-point-input')
-        const description = document.getElementById('add-description-input')
+    saveTodo.click(()=>{
+        const title = $('#add-title-input')
+        const point = $('#add-point-input')
+        const description = $('#add-description-input')
 
-        if(title.value === "" || description.value === "" || point.value === ""){
+        if(title.val() === "" || description.val() === "" || point.val() === ""){
             alert("All fields are requried")
             return;
         }
 
-        if(point.value > 5 || point.value < 1){
+        if(point.val() > 5 || point.val() < 1){
             alert('Points are set between 1 and 5');
             return;
         }
@@ -106,75 +106,77 @@ window.onload = ()=>{
         console.log({title, description, point})
         let newItem = {
             id : Date.now()+Math.floor((Math.random()*100000)),
-            title : title.value,
-            description : description.value,
-            point : point.value,
+            title : title.val(),
+            description : description.val(),
+            point : point.val(),
             is_done : false,
             created_at : Date.now()
         }
         todoItems.push(newItem)
         localStorage.setItem('todo-items', JSON.stringify(todoItems))
         
-        title.value=""
-        description.value=""
-        point.value=""
+        title.val('')
+        description.val('')
+        point.val('')
 
-        addModal.style.display = 'none'
+        addModal.hide()
         fetchTodoItems(todoItems);
-    }
+    })
 
 
     // Remove Todo Item
     const removeItem = (id)=>{
-        confirmRemoveModal.style.display = 'block'
-        const cancel = document.getElementById('cancel-remove')
-        const confirm = document.getElementById('confirm-remove')
+        confirmRemoveModal.show()
+        const cancel = $('#cancel-remove')
+        const confirm = $('#confirm-remove')
 
-        cancel.onclick = ()=>{
-            confirmRemoveModal.style.display = 'none'
-        }
-        confirm.onclick = ()=>{
+        cancel.click(()=>{
+            confirmRemoveModal.hide()
+        })
+        confirm.click(()=>{
             console.log(id)
             todoItems = todoItems.filter(item=>item.id != id)
             localStorage.setItem('todo-items', JSON.stringify(todoItems))
             fetchTodoItems(todoItems)
-            confirmRemoveModal.style.display = 'none'
-        }
+            confirmRemoveModal.hide()
+        })
     }
 
     // Edit Todo Item
     const editTodo = (id)=>{
+        editModal.show()
+
         const index = todoItems.findIndex(item=> item.id === id)
 
-        const cancel = document.getElementById('cancel-edit')
-        const save = document.getElementById('save-edit')
+        const cancel = $('#cancel-edit')
+        const save = $('#save-edit')
 
-        const title = document.getElementById('edit-title-input')
-        const point = document.getElementById('edit-point-input')
-        const description = document.getElementById('edit-description-input')
+        const title = $('#edit-title-input')
+        const point = $('#edit-point-input')
+        const description = $('#edit-description-input')
         
 
-        title.value = todoItems[index].title;
-        description.value = todoItems[index].description;
-        point.value = todoItems[index].point
+        title.val(todoItems[index].title)
+        description.val(todoItems[index].description)
+        point.val(todoItems[index].point)
 
 
-        cancel.onclick = () => {
-            editModal.style.display = 'none'
-        }
+        cancel.click(() => {
+            editModal.hide()
+        })
 
-        save.onclick = () => {
+        save.click(() => {
             todoItems[index] = {
                 ...todoItems[index],
-                title: title.value,
-                point: point.value,
-                description: description.value
+                title: title.val(),
+                point: point.val(),
+                description: description.val()
             }
             localStorage.setItem('todo-items', JSON.stringify(todoItems))
             fetchTodoItems(todoItems)
-            editModal.style.display = 'none'
-        }
-        editModal.style.display = 'block'
+            editModal.hide()
+        })
+        
     }
 
     // Mark Todo Item as Done
